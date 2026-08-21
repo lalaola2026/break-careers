@@ -185,6 +185,9 @@
     .pos-toggle{width:38px;height:38px}
     .row2{grid-template-columns:1fr}
   }
+  @media (forced-colors:active){
+    .pos-toggle::before,.pos-toggle::after{background:ButtonText;forced-color-adjust:none}
+  }
   @media (prefers-reduced-motion:reduce){
     .noise{animation:none}
     .rv{transition:none;opacity:1;transform:none}
@@ -952,18 +955,22 @@
     if(SHEETS_ENDPOINT){
       var btn=document.getElementById('f-submit');
       btn.disabled=true; btn.textContent='접수 중…';
+      // 응답의 {ok:true}까지 확인한 뒤에만 성공 처리 — 실패 시 입력값은 보존됩니다.
       fetch(SHEETS_ENDPOINT,{
         method:'POST',
-        mode:'no-cors',
         headers:{'Content-Type':'text/plain;charset=utf-8'},
         body:JSON.stringify({position:pos,name:name,email:email,phone:phone,link:link,intro:msg,ts:new Date().toISOString()})
-      }).then(function(){
+      }).then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return r.json();
+      }).then(function(j){
+        if(!j || j.ok!==true) throw new Error('unexpected response');
         ['f-name','f-phone','f-email','f-link','f-msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
         btn.textContent='접수 완료 ✓';
         setTimeout(function(){ btn.disabled=false; btn.textContent='지원서 보내기'; },4000);
       }).catch(function(){
         btn.disabled=false; btn.textContent='지원서 보내기';
-        alert('접수에 실패했어요. 잠시 후 다시 시도하거나 career@break.co.kr로 보내주세요.');
+        alert('접수에 실패했어요. 입력하신 내용은 그대로 있으니 잠시 후 다시 시도하거나, career@break.co.kr로 보내주세요.');
       });
       return;
     }
