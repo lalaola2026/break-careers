@@ -122,14 +122,18 @@
   /* positions accordion */
   .posgrid{display:grid;gap:14px}
   .pos{border:1px solid var(--line);background:var(--ink-2);border-radius:var(--radius);transition:border-color .25s var(--ease),box-shadow .25s var(--ease);overflow:hidden}
-  .pos:hover{border-color:var(--gold);box-shadow:var(--shadow-hover)}
-  .pos-head{width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;padding:26px 28px;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--sans)}
-  .pos-head .ptop{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:8px}
-  .tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
-  .pos-head h3{font-weight:800;font-size:1.32rem;color:var(--paper);letter-spacing:-.02em}
-  .pos-head .meta{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--paper-dim);text-transform:uppercase}
-  .pos-toggle{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);white-space:nowrap;transition:.25s}
-  .pos-head[aria-expanded="true"] .pos-toggle{color:var(--gold-hi)}
+  .pos:hover,.pos.open{border-color:var(--gold);box-shadow:var(--shadow-hover)}
+  .pos-head{width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;padding:28px 30px;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--sans)}
+  .pos-head .ptop{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+  .tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);background:rgba(0,50,91,.07);border-radius:999px;padding:5px 12px}
+  .pos-head h3{font-weight:800;font-size:1.38rem;color:var(--paper);letter-spacing:-.02em;line-height:1.3}
+  .pos-head .meta{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--paper-dim);text-transform:uppercase;margin-top:10px}
+  .pos-toggle{width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:50%;background:#fff;position:relative;transition:transform .35s var(--ease),border-color .25s var(--ease),background .25s var(--ease)}
+  .pos-toggle::before,.pos-toggle::after{content:"";position:absolute;left:50%;top:50%;background:var(--gold);transform:translate(-50%,-50%)}
+  .pos-toggle::before{width:15px;height:1.6px}
+  .pos-toggle::after{width:1.6px;height:15px}
+  .pos:hover .pos-toggle{border-color:var(--gold)}
+  .pos-head[aria-expanded="true"] .pos-toggle{transform:rotate(45deg);border-color:var(--gold);background:rgba(0,50,91,.06)}
   .pos-detail{padding:0 28px;border-top:1px solid var(--line);overflow:hidden;transition:max-height .5s var(--ease)}
   .pos-detail .desc{color:var(--paper);font-size:.98rem;margin:22px 0 8px;font-weight:600}
   .jd h5{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:22px 0 10px}
@@ -176,8 +180,9 @@
     .hero-cards img{width:128%;max-width:none}
   }
   @media (max-width:640px){
-    .pos-head{grid-template-columns:1fr;gap:14px;padding:22px 22px}
-    .pos-detail{padding:0 22px}
+    .pos-head{gap:16px;padding:22px 20px}
+    .pos-detail{padding:0 20px}
+    .pos-toggle{width:38px;height:38px}
     .row2{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
@@ -382,7 +387,7 @@
             <div class="ptop"><span class="tag">TELECA · 사업기획</span><h3>TELECA 사업기획 · Growth 담당자</h3></div>
             <div class="meta">경력 5년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">TELECA의 연간 성장 전략과 프로젝트 포트폴리오를 설계합니다. 상품·채널·캠페인을 숫자로 꿰는 자리.</p>
@@ -430,7 +435,7 @@
             <div class="ptop"><span class="tag">TELECA · B2B</span><h3>B2B 채널 세일즈 매니저</h3></div>
             <div class="meta">경력 3년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">국내외 유통사·플랫폼·바이어를 발굴하고 거래 구조를 직접 설계합니다. 해외 확장의 최전선.</p>
@@ -475,7 +480,7 @@
             <div class="ptop"><span class="tag">TELECA · B2B</span><h3>주니어 세일즈 매니저 (B2B)</h3></div>
             <div class="meta">경력 1~3년</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">해외 도매 거래처 발굴부터 프리오더 영업까지, 거래를 직접 만들어내는 실무 세일즈.</p>
@@ -510,7 +515,7 @@
             <div class="ptop"><span class="tag">TELECA · PM</span><h3>IP 프로젝트 매니저</h3></div>
             <div class="meta">경력 3년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">기획부터 발매까지, IP 카드 프로젝트의 전 과정을 일정과 품질로 완성합니다.</p>
@@ -551,7 +556,7 @@
             <div class="ptop"><span class="tag">BRAND · 캠페인</span><h3>브랜드 캠페인 담당자</h3></div>
             <div class="meta">경력 5년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">제품 런칭부터 팝업스토어·카드쇼까지, 세 사업을 관통하는 브랜드 경험을 설계하고 현장에서 완성합니다.</p>
@@ -592,7 +597,7 @@
             <div class="ptop"><span class="tag">MARKETING</span><h3>시니어 마케터</h3></div>
             <div class="meta">경력 3년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">TELECA·BREAK·brg를 아우르는 마케팅 전략을 세우고, 팬덤과 컬렉터의 완판을 견인합니다.</p>
@@ -631,7 +636,7 @@
             <div class="ptop"><span class="tag">BREAK · PRODUCT</span><h3>Growth Product Designer</h3></div>
             <div class="meta">경력 2년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">BREAK 웹·앱의 UX/UI 설계부터 그로스 콘텐츠 디자인까지, 전환을 만드는 디자인을 합니다.</p>
@@ -676,7 +681,7 @@
             <div class="ptop"><span class="tag">DESIGN</span><h3>그래픽 디자이너</h3></div>
             <div class="meta">경력 3년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">애니메이션·스포츠·엔터 IP의 트레이딩 카드부터 브랜드 디자인까지, 팬덤이 반응하는 비주얼을 만듭니다.</p>
@@ -713,7 +718,7 @@
             <div class="ptop"><span class="tag">brg · 운영</span><h3>제품 품질 검수·운영 담당자</h3></div>
             <div class="meta">신입~경력 4년</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">brg 카드 인증 서비스의 입고부터 출고까지, 품질 기준을 지키는 자리. 꼼꼼함이 곧 신뢰가 됩니다.</p>
@@ -755,7 +760,7 @@
             <div class="ptop"><span class="tag">PEOPLE · 경영지원</span><h3>인사총무 담당자</h3></div>
             <div class="meta">경력 1년 이상</div>
           </div>
-          <span class="pos-toggle">상세 보기 +</span>
+          <span class="pos-toggle" aria-hidden="true"></span>
         </button>
         <div class="pos-detail" hidden>
           <p class="desc">급여·근태부터 채용·온보딩·근무환경까지, 인사·총무 체계를 주도적으로 만들어갑니다.</p>
@@ -830,7 +835,7 @@
         </div>
         <div class="field"><label for="f-link">포트폴리오·링크 (선택)</label><input id="f-link" type="url" placeholder="https://" /></div>
         <div class="field"><label for="f-msg">간단한 소개</label><textarea id="f-msg" placeholder="어떤 사람인지, 왜 지원하는지 편하게 적어주세요."></textarea></div>
-        <button class="btn btn-solid" onclick="submitApply()">지원서 보내기</button>
+        <button class="btn btn-solid" id="f-submit" onclick="submitApply()">지원서 보내기</button>
       </div>
     </div>
   </div>
@@ -888,7 +893,7 @@
     h.addEventListener('click',function(){
       var open=h.getAttribute('aria-expanded')==='true';
       h.setAttribute('aria-expanded', open?'false':'true');
-      h.querySelector('.pos-toggle').textContent= open?'상세 보기 +':'접기 −';
+      h.parentElement.classList.toggle('open',!open);
       if(open){
         if(!d.style.maxHeight || d.style.maxHeight==='none') d.style.maxHeight=d.scrollHeight+'px';
         requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.style.maxHeight='0px'; }); });
@@ -937,11 +942,31 @@
     });
   });
 
-  // 지원서 제출 (백엔드 연결 전: 접수 메일 자동 작성)
+  // 지원서 제출 — SHEETS_ENDPOINT에 Apps Script 웹 앱 URL(/exec)을 넣으면 구글 시트로 접수됩니다.
+  // 비어 있는 동안은 접수 메일 자동 작성(mailto)으로 동작합니다.
+  var SHEETS_ENDPOINT='';
   function submitApply(){
     var g=function(id){ var e=document.getElementById(id); return e?e.value.trim():''; };
     var name=g('f-name'), phone=g('f-phone'), email=g('f-email'), pos=g('f-position'), link=g('f-link'), msg=g('f-msg');
     if(!name||!email){ alert('이름과 이메일은 꼭 입력해주세요.'); return; }
+    if(SHEETS_ENDPOINT){
+      var btn=document.getElementById('f-submit');
+      btn.disabled=true; btn.textContent='접수 중…';
+      fetch(SHEETS_ENDPOINT,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({position:pos,name:name,email:email,phone:phone,link:link,intro:msg,ts:new Date().toISOString()})
+      }).then(function(){
+        ['f-name','f-phone','f-email','f-link','f-msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+        btn.textContent='접수 완료 ✓';
+        setTimeout(function(){ btn.disabled=false; btn.textContent='지원서 보내기'; },4000);
+      }).catch(function(){
+        btn.disabled=false; btn.textContent='지원서 보내기';
+        alert('접수에 실패했어요. 잠시 후 다시 시도하거나 career@break.co.kr로 보내주세요.');
+      });
+      return;
+    }
     var subject='[지원] '+pos+' - '+name;
     var body='지원 포지션: '+pos+'\n이름: '+name+'\n이메일: '+email+'\n연락처: '+phone+'\n포트폴리오/링크: '+link+'\n\n[간단한 소개]\n'+msg+'\n\n※ 이력서·포트폴리오 파일을 이 메일에 첨부해 주세요.';
     window.location.href='mailto:career@break.co.kr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
