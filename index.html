@@ -29,7 +29,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.65;font-weight:400;overflow-x:hidden}
+  body{background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.65;font-weight:400;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
   ::selection{background:var(--gold);color:#fff}
   a{color:inherit;text-decoration:none}
   strong{color:var(--gold-hi);font-weight:700}
@@ -136,12 +136,12 @@
   .pos-head[aria-expanded="true"] .pos-toggle{transform:rotate(45deg);border-color:var(--gold);background:rgba(0,50,91,.06)}
   .pos-detail{padding:0 30px;border-top:1px solid var(--line);background:#fff;overflow:hidden;transition:max-height .5s var(--ease)}
   .pos-detail .desc{color:var(--paper);font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.6;max-width:56ch;margin:30px 0 34px}
-  .jd{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:56px;row-gap:34px}
-  .jd h5{grid-column:1;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0;padding-top:3px}
-  .jd ul{grid-column:2;list-style:none;display:grid;gap:10px;max-width:640px}
+  .jd{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:56px;row-gap:0}
+  .jd h5{grid-column:1;border-top:1px solid var(--line);padding:24px 0 28px;margin:0;font-size:1.02rem;font-weight:700;color:var(--paper);letter-spacing:-.01em;line-height:1.5}
+  .jd ul{grid-column:2;border-top:1px solid var(--line);padding:26px 0 28px;margin:0;list-style:none;display:grid;gap:10px;max-width:640px}
   .jd li{position:relative;padding-left:20px;color:var(--paper-dim);font-size:.95rem;line-height:1.7}
   .jd li::before{content:"";position:absolute;left:2px;top:.66em;width:5px;height:5px;background:var(--gold);border-radius:50%}
-  .pos-detail .apply-btn{margin:36px 0 34px 246px;display:inline-block}
+  .pos-detail .apply-btn{margin:6px 0 34px 246px;display:inline-block}
 
   /* apply form */
   .apply-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
@@ -155,6 +155,10 @@
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold-hi);box-shadow:0 0 0 4px rgba(10,76,134,.12)}
   .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%234F5E6D' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
   .field textarea{resize:vertical;min-height:110px}
+  .field input[type="file"]{padding:9px 10px;cursor:pointer}
+  .field input[type="file"]::file-selector-button{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--gold-hi);background:rgba(0,50,91,.07);border:none;border-radius:999px;padding:7px 14px;margin-right:12px;cursor:pointer;transition:background .2s var(--ease)}
+  .field input[type="file"]::file-selector-button:hover{background:rgba(0,50,91,.12)}
+  .field .hint{font-size:.78rem;color:var(--paper-dim)}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 
   footer{border-top:1px solid var(--line);padding:34px 0;color:var(--paper-dim)}
@@ -173,10 +177,10 @@
   }
   @media (max-width:820px){
     .jd{display:block}
-    .jd h5{margin:26px 0 12px;padding-top:0}
-    .jd ul{max-width:none}
-    .pos-detail .desc{margin:26px 0 6px}
-    .pos-detail .apply-btn{margin:30px 0 30px}
+    .jd h5{margin:0;padding:22px 0 14px}
+    .jd ul{border-top:none;padding:0;max-width:none}
+    .pos-detail .desc{margin:26px 0 22px}
+    .pos-detail .apply-btn{margin:26px 0 30px}
     .split{grid-template-columns:1fr;gap:40px}
     .units,.bene{grid-template-columns:1fr}
     .culture{grid-template-columns:1fr}
@@ -817,7 +821,7 @@
     <div class="apply-wrap">
       <div class="apply-note rv">
         <h3>좋아하는 걸,<br>일로 만들 차례.</h3>
-        <p>아래 양식을 작성하면 지원이 접수됩니다. 이력서·포트폴리오 파일은 접수 메일에 첨부해 보내주세요.</p>
+        <p>아래 양식을 작성하면 지원이 접수됩니다. 이력서 파일은 양식에서 바로 첨부할 수 있어요.</p>
         <p>문의는 <a href="mailto:career@break.co.kr">career@break.co.kr</a></p>
       </div>
       <div class="form rv">
@@ -843,6 +847,11 @@
           </select>
         </div>
         <div class="field"><label for="f-link">포트폴리오·링크 (선택)</label><input id="f-link" type="url" placeholder="https://" /></div>
+        <div class="field">
+          <label for="f-file">이력서 파일 첨부 (선택)</label>
+          <input id="f-file" type="file" accept=".pdf,.doc,.docx,.hwp,.hwpx" />
+          <span class="hint">PDF · Word · HWP, 5MB 이하</span>
+        </div>
         <div class="field"><label for="f-msg">간단한 소개</label><textarea id="f-msg" placeholder="어떤 사람인지, 왜 지원하는지 편하게 적어주세요."></textarea></div>
         <button class="btn btn-solid" id="f-submit" onclick="submitApply()">지원서 보내기</button>
       </div>
@@ -958,26 +967,42 @@
     var g=function(id){ var e=document.getElementById(id); return e?e.value.trim():''; };
     var name=g('f-name'), phone=g('f-phone'), email=g('f-email'), pos=g('f-position'), link=g('f-link'), msg=g('f-msg');
     if(!name||!email){ alert('이름과 이메일은 꼭 입력해주세요.'); return; }
+    var fileEl=document.getElementById('f-file');
+    var file=(fileEl && fileEl.files) ? fileEl.files[0] : null;
+    if(file && file.size>5*1024*1024){ alert('이력서 파일은 5MB 이하로 첨부해주세요.'); return; }
     if(SHEETS_ENDPOINT){
       var btn=document.getElementById('f-submit');
       btn.disabled=true; btn.textContent='접수 중…';
-      // 응답의 {ok:true}까지 확인한 뒤에만 성공 처리 — 실패 시 입력값은 보존됩니다.
-      fetch(SHEETS_ENDPOINT,{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify({position:pos,name:name,email:email,phone:phone,link:link,intro:msg,ts:new Date().toISOString()})
-      }).then(function(r){
-        if(!r.ok) throw new Error('HTTP '+r.status);
-        return r.json();
-      }).then(function(j){
-        if(!j || j.ok!==true) throw new Error('unexpected response');
-        ['f-name','f-phone','f-email','f-link','f-msg'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
-        btn.textContent='접수 완료 ✓';
-        setTimeout(function(){ btn.disabled=false; btn.textContent='지원서 보내기'; },4000);
-      }).catch(function(){
+      var fail=function(){
         btn.disabled=false; btn.textContent='지원서 보내기';
         alert('접수에 실패했어요. 입력하신 내용은 그대로 있으니 잠시 후 다시 시도하거나, career@break.co.kr로 보내주세요.');
-      });
+      };
+      var send=function(resume){
+        var data={position:pos,name:name,email:email,phone:phone,link:link,intro:msg,ts:new Date().toISOString()};
+        if(resume){ data.resumeName=resume.name; data.resumeType=resume.type; data.resumeData=resume.data; }
+        // 응답의 {ok:true}까지 확인한 뒤에만 성공 처리 — 실패 시 입력값은 보존됩니다.
+        fetch(SHEETS_ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify(data)
+        }).then(function(r){
+          if(!r.ok) throw new Error('HTTP '+r.status);
+          return r.json();
+        }).then(function(j){
+          if(!j || j.ok!==true) throw new Error('unexpected response');
+          ['f-name','f-phone','f-email','f-link','f-msg','f-file'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+          btn.textContent='접수 완료 ✓';
+          setTimeout(function(){ btn.disabled=false; btn.textContent='지원서 보내기'; },4000);
+        }).catch(fail);
+      };
+      if(file){
+        var rd=new FileReader();
+        rd.onload=function(){ send({name:file.name,type:file.type||'application/octet-stream',data:String(rd.result).split(',')[1]||''}); };
+        rd.onerror=fail;
+        rd.readAsDataURL(file);
+      }else{
+        send(null);
+      }
       return;
     }
     var subject='[지원] '+pos+' - '+name;
