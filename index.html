@@ -947,7 +947,7 @@
 
   // 지원서 제출 — SHEETS_ENDPOINT에 Apps Script 웹 앱 URL(/exec)을 넣으면 구글 시트로 접수됩니다.
   // 비어 있는 동안은 접수 메일 자동 작성(mailto)으로 동작합니다.
-  var SHEETS_ENDPOINT='';
+  var SHEETS_ENDPOINT='https://script.google.com/macros/s/AKfycbx_UbYMxvGkVxSoHpOsdcLt0AAVixOFhW4tMZQifRmCU-fccF5ejXzfAdGEvod79DTY/exec';
   function submitApply(){
     var g=function(id){ var e=document.getElementById(id); return e?e.value.trim():''; };
     var name=g('f-name'), phone=g('f-phone'), email=g('f-email'), pos=g('f-position'), link=g('f-link'), msg=g('f-msg');
