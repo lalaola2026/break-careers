@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://careers.break.co.kr/sitemap.xml
