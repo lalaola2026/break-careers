@@ -1009,6 +1009,7 @@
           ['f-name','f-phone','f-email','f-link','f-msg','f-file'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
           btn.textContent='접수 완료 ✓';
           setTimeout(function(){ btn.disabled=false; btn.textContent='지원서 보내기'; },4000);
+          alert('접수가 완료되었습니다.\n인사 담당자가 확인 후 3영업일 이내로 회신드릴 예정입니다.');
         }).catch(fail);
       };
       if(file){
