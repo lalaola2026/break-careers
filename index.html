@@ -834,7 +834,7 @@
             <option>상시 지원 (직군 무관)</option>
           </select>
         </div>
-        <div class="field" id="f-tcg-wrap" style="display:none">
+        <div class="field" id="f-tcg-wrap">
           <label for="f-tcg">브레이크앤컴퍼니에서 해보고 싶은 일 · 가장 자신 있는 일 (필수)</label>
           <textarea id="f-tcg" placeholder="브레이크앤컴퍼니에서 해보고 싶은 일과, 본인이 가장 자신 있는 일을 적어주세요."></textarea>
         </div>
@@ -941,16 +941,6 @@
     });
   })();
 
-  // TCG·트레이딩 카드 전문가 선택 시에만 전용 필수 항목 노출
-  var TCG_POS='[전 직군] TCG・트레이딩 카드 전문가';
-  function updateTcgField(){
-    var sel=document.getElementById('f-position');
-    var wrap=document.getElementById('f-tcg-wrap');
-    if(sel&&wrap) wrap.style.display=(sel.value===TCG_POS)?'':'none';
-  }
-  document.getElementById('f-position').addEventListener('change',updateTcgField);
-  updateTcgField();
-
   // 지원하기 버튼 → 포지션 자동 선택
   document.querySelectorAll('.apply-btn').forEach(function(b){
     b.addEventListener('click',function(){
@@ -958,7 +948,6 @@
       var sel=document.getElementById('f-position');
       if(sel&&p){
         for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===p||sel.options[i].text===p){ sel.selectedIndex=i; break; } }
-        updateTcgField();
       }
     });
   });
@@ -970,8 +959,8 @@
     var g=function(id){ var e=document.getElementById(id); return e?e.value.trim():''; };
     var name=g('f-name'), phone=g('f-phone'), email=g('f-email'), pos=g('f-position'), link=g('f-link'), msg=g('f-msg'), tcg=g('f-tcg');
     if(!name||!email){ alert('이름과 이메일은 꼭 입력해주세요.'); return; }
-    if(pos===TCG_POS && !tcg){ alert('브레이크앤컴퍼니에서 해보고 싶은 일과 가장 자신 있는 일을 꼭 적어주세요.'); return; }
-    if(pos===TCG_POS && tcg){ msg='[해보고 싶은 일 · 가장 자신 있는 일]\n'+tcg+(msg?'\n\n[간단한 소개]\n'+msg:''); }
+    if(!tcg){ alert('브레이크앤컴퍼니에서 해보고 싶은 일과 가장 자신 있는 일을 꼭 적어주세요.'); return; }
+    msg='[해보고 싶은 일 · 가장 자신 있는 일]\n'+tcg+(msg?'\n\n[간단한 소개]\n'+msg:'');
     var fileEl=document.getElementById('f-file');
     var file=(fileEl && fileEl.files) ? fileEl.files[0] : null;
     if(!file){ alert('이력서 파일을 꼭 첨부해주세요.'); return; }
